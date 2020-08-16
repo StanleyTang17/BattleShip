@@ -1,0 +1,33 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://unpkg.com/konva@7.0.5/konva.min.js"></script>
+<script src="board.js"></script>
+<link rel="stylesheet" href="style.css">
+
+<h1 id="announcement">Welcome to BattleShip</h1>
+
+<div id="name_container" class="container">
+    <input type="text" id="name_input" placeholder="name">
+    <button id="submit_name">Enter</button>
+</div>
+
+<div id="canvas_container" class="container row">
+    <section id="my_column" class="column">
+        <h2 id="my_title">Your board</h2>
+        <div id="my_konva"></div>
+        <div>
+            <button id="rotate">Rotate Ship</button>
+            <button id="randomize">Randomize Ships</button>
+        </div>
+    </section>
+
+    <section id="opponent_column" class="column">
+        <h2 id="opponent_title">Opponent board</h2>
+        <div id="opponent_konva"></div>
+        <div>
+            <button id="find_match">Find Match</button>
+            <button id="reset">Reset</button>
+        </div>
+    </section>
+</div>
+
+<script src="main.js"></script>
