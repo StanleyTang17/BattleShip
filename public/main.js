@@ -79,6 +79,7 @@ btn_reset.addEventListener('click', () => {
     btn_randomize.disabled = false;
     btn_match.disabled = false;
     btn_reset.disabled = true;
+    opponent_title.innerHTML = 'Opponent board';
     announ.innerHTML = 'Prepare Your Ships';
 });
 

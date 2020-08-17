@@ -58,6 +58,10 @@ io.sockets.on('connection', socket => {
     });
 
     socket.on('reset', () => {
-        socket.opponent = null;
+        if(socket.opponent) {
+            socket.opponent.opponent = null;
+            socket.opponent = null;
+            console.log('resetting');
+        }
     });
 });
