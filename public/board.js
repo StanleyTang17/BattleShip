@@ -231,6 +231,11 @@ function createBoard() {
 
                 konvaImg.on('touchstart', () => {
                     this.select = i;
+                    this.highlight.hide();
+                });
+
+                konvaImg.on('touchend', () => {
+                    this.highlight.show();
                     this.konvaHightlight();
                 });
 
