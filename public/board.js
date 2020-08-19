@@ -224,6 +224,16 @@ function createBoard() {
                     }
                 });
 
+                konvaImg.on('tap', () => {
+                    this.select = i;
+                    this.konvaHightlight();
+                });
+
+                konvaImg.on('touchstart', () => {
+                    this.select = i;
+                    this.konvaHightlight();
+                });
+
                 konvaImg.on('click', () => {
                     this.select = i;
                     this.konvaHightlight();
