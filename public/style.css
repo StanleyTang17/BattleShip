@@ -46,9 +46,17 @@ button {
     float: left;
     width: 50%;
 }
-
+/* 
 .row:after {
     content: "";
     display: table;
     clear: both;
+} */
+
+@media (max-width: 1000px) {
+    .column {
+        float: center;
+        width: 100%;
+        padding-bottom: 50px;
+    }
 }

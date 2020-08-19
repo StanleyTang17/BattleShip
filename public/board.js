@@ -357,9 +357,9 @@ function createOpponentBoard(stage, onclick) {
                 return node.getClassName() === 'Rect' && node.width() === 40;
             }).forEach(rect => {
                 rect.show();
-                rect.on('click', () => {
+                rect.on('mouseup', () => {
                     if(this.lock) return;
-                    rect.off('click');
+                    rect.off('mouseup');
                     rect.hide();
                     this.lock = true;
                     onclick(Math.floor(rect.y() / 40), Math.floor(rect.x() / 40));
