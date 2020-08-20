@@ -87,7 +87,9 @@ function createBoard() {
             if(this.suitable(index, newCoords)) {
                 ship.coordinates = newCoords;
                 ship.direction = newDir;
-                this.konvaRotate(index, newDir);
+                this.konvaRotate(this.konvaImgs[index], newDir);
+                this.layer.batchDraw();
+                this.konvaHightlight();
                 return true;
             }
 
@@ -214,14 +216,23 @@ function createBoard() {
                         x = Math.round(x / 40) * 40 + 1;
                         y = Math.round(y / 40) * 40 + 1;
 
-                        var pos = getPos(ships, i);
-                        var rowShift = Math.round((y - pos.y) / 40);
-                        var colShift = Math.round((x - pos.x) / 40);
+                        //after the img is rotated, the reference point is at the top right corner
+                        //instead of top left corner. x is adjusted so that it's as if the reference
+                        //point is at the top left corner.
+                        if(ship.direction === 'vertical') x -= 40;
+
+                        var oldPos = getPos(ships, i);
+
+                        var rowShift = Math.round((y - oldPos.y) / 40);
+                        var colShift = Math.round((x - oldPos.x) / 40);
                         moveShip(ships, i, rowShift, colShift);
                         
                         var newPos = getPos(ships, i);
+
+                        if(ship.direction === 'vertical') newPos.x += 40;
+
                         return {x: newPos.x + 1, y: newPos.y + 1};
-                    }
+                    },
                 });
 
                 konvaImg.on('tap', () => {
@@ -254,22 +265,25 @@ function createBoard() {
                     this.konvaHightlight();
                 });
                 
+                if(ship.direction === 'vertical')
+                    this.konvaRotate(konvaImg, 'vertical');
+
                 this.layer.add(konvaImg);
                 this.layer.batchDraw();
                 this.konvaImgs[i] = konvaImg;
             };
-            img.src = `imgs/ship_${i}${ship.direction === 'horizontal' ? 0 : 1}.png`;
+            img.src = `imgs/ship_${i}0.png`;
         },
-        konvaRotate: function(index, direction) {
-            var img = new Image();
-            img.onload = () => {
-                this.konvaImgs[index].image(img);
-                this.layer.batchDraw();
-            };
-            img.src = `imgs/ship_${index}${direction === 'horizontal' ? 0 : 1}.png`;
-            this.konvaHightlight();
+        konvaRotate: function(konvaImg, direction) {
+            if(direction === 'horizontal') {
+                konvaImg.rotation(0);
+                konvaImg.x(konvaImg.x() - 40);
+            }else {
+                konvaImg.rotation(90);
+                konvaImg.x(konvaImg.x() + 40);
+            }
         },
-        konvaHightlight: function(enable) {
+        konvaHightlight: function() {
             if(!this.highlight) return;
             if(this.select < 0) {
                 this.highlight.hide();
