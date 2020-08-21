@@ -46,16 +46,26 @@ button {
     float: left;
     width: 50%;
 }
-/* 
+
 .row:after {
     content: "";
     display: table;
     clear: both;
-} */
+}
 
 @media (max-width: 1000px) {
     .column {
         float: center;
         width: 100%;
     }
+}
+
+@viewport {
+    zoom: 1.0;
+    width: extend-to-zoom;
+}
+
+@-ms-viewport {
+    zoom: 1.0;
+    width: extend-to-zoom;
 }
