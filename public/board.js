@@ -272,7 +272,7 @@ function createBoard() {
                 this.layer.batchDraw();
                 this.konvaImgs[i] = konvaImg;
             };
-            img.src = `imgs/ship_${i}0.png`;
+            img.src = `imgs/ship_${i}.png`;
         },
         konvaRotate: function(konvaImg, direction) {
             if(direction === 'horizontal') {
